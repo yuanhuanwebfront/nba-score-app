@@ -1,0 +1,57 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/data/data",
+			"style": {
+				"navigationBarTitleText": "数据"
+			}
+		},
+		{
+			"path": "pages/filter/filter",
+			"style": {
+				"navigationBarTitleText": "过滤"
+			}
+		}
+	],
+
+	"tabBar": {
+		"color": "#ffffff",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#071239",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/images/tabbar/home.png",
+				"selectedIconPath": "static/images/tabbar/home-selected.png"
+			},
+			{
+				"pagePath": "pages/data/data",
+				"text": "数据",
+				"iconPath": "static/images/tabbar/data.png",
+				"selectedIconPath": "static/images/tabbar/data-selected.png"
+			},
+			{
+				"pagePath": "pages/filter/filter",
+				"text": "过滤",
+				"iconPath": "static/images/tabbar/filter.png",
+				"selectedIconPath": "static/images/tabbar/filter-selected.png"
+			}
+		]
+	},
+
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}
