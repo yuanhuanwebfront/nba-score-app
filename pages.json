@@ -3,26 +3,40 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/index/game/game",
+			"style": {
+				"navigationBarTitleText": "比赛",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/data/data",
 			"style": {
-				"navigationBarTitleText": "数据"
+				"navigationBarTitleText": "球队",
+				"app-plus": {
+					"bounce": "none"
+				}
 			}
 		},
 		{
 			"path": "pages/filter/filter",
 			"style": {
-				"navigationBarTitleText": "过滤"
+				"navigationBarTitleText": "球员"
 			}
 		}
 	],
 
 	"tabBar": {
 		"color": "#ffffff",
-		"selectedColor": "#3cc51f",
+		"selectedColor": "#b5262f",
 		"borderStyle": "black",
 		"backgroundColor": "#071239",
 		"list": [
@@ -34,15 +48,15 @@
 			},
 			{
 				"pagePath": "pages/data/data",
-				"text": "数据",
-				"iconPath": "static/images/tabbar/data.png",
-				"selectedIconPath": "static/images/tabbar/data-selected.png"
+				"text": "球队",
+				"iconPath": "static/images/tabbar/team.png",
+				"selectedIconPath": "static/images/tabbar/team-selected.png"
 			},
 			{
 				"pagePath": "pages/filter/filter",
-				"text": "过滤",
-				"iconPath": "static/images/tabbar/filter.png",
-				"selectedIconPath": "static/images/tabbar/filter-selected.png"
+				"text": "球员",
+				"iconPath": "static/images/tabbar/player.png",
+				"selectedIconPath": "static/images/tabbar/player-selected.png"
 			}
 		]
 	},
