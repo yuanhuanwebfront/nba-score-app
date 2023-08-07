@@ -1,15 +1,20 @@
 <template>
 	<view class="game-area">
 		<view class="flex-box tab-area">
-			<view class="tab-item active">技术统计</view>
-			<view class="tab-item">文字直播</view>
-			<view class="tab-item">球队对比</view>
+			<view v-for="tab in tabs" :key="tab.id" class="tab-item" :class="{active: tab.id == currentTab}"
+				@click="currentTab = tab.id">{{tab.label}}</view>
 		</view>
 		
 		<view>
-			<StatsView :homeTeam="homeTeam" :awayTeam="awayTeam"></StatsView>
 			
-			<GameStats v-if="showPage" :homeTeam="homeTeam" :awayTeam="awayTeam"></GameStats>
+			<template v-if="currentTab == 1">
+				<StatsView v-if="currentTab == 1" :homeTeam="homeTeam" :awayTeam="awayTeam"></StatsView>
+				<GameStats v-if="showPage" :homeTeam="homeTeam" :awayTeam="awayTeam"></GameStats>
+			</template>
+			
+			<template v-if="currentTab == 2 && showPage">
+				<WordLive :homeTeam="homeTeam" :awayTeam="awayTeam" :options="options"></WordLive>
+			</template>
 		</view>
 	</view>
 </template>
@@ -19,20 +24,30 @@
 	
 	import StatsView from './StatsView.vue';
 	import GameStats from './GameStats.vue';
+	import WordLive from './WordLive.vue';
 	
 	export default {
 		components: {
 			StatsView,
-			GameStats
+			GameStats,
+			WordLive
 		},
 		data(){
 			return {
+				tabs: [
+					{label: '技术统计', id: 1},
+					{label: '文字直播', id: 2},
+					{label: '球队对比', id: 3},
+				],
 				homeTeam: {},
 				awayTeam: {},
-				showPage: false
+				showPage: false,
+				currentTab: 1,
+				liveList: []
 			}
 		},
 		onLoad(options){
+			this.options = options;
 			this.getStats(options);
 		},
 		methods: {

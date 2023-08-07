@@ -1,5 +1,8 @@
 <script>
 	export default {
+		globalData: {
+			gameOrder: {}
+		},
 		onLaunch: function() {
 			
 		},

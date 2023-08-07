@@ -21,3 +21,8 @@ export const getScheduleApi = function(data){
 export const getGameStatsApi = function(data){
 	return httpRequest.get('https://m.china.nba.cn/stats2/game/snapshot.json?countryCode=CN&locale=zh_CN&tz=%2B8', data);
 }
+
+// 获取比赛直播信息
+export const getGameLiveDataApi = function(data){
+	return httpRequest.get('https://m.china.nba.cn/stats2/game/playbyplay.json?locale=zh_CN', data)
+}

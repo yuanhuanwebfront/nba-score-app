@@ -52,8 +52,9 @@
 	.home-area{
 		width: 100vw;
 		min-height: 100vh;
-		background-color: #f7f7fb;
+		background-color: #f5f4f8;
 		padding: 32rpx;
 		box-sizing: border-box;
+		padding-top: 0	
 	}
 </style>

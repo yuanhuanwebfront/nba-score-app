@@ -10,7 +10,7 @@
 		<view class="stats-table">
 			<view class="name-column name">
 				<view class="name-header">姓名</view>
-				<view class="name-text" v-for="(item, idx) in nameList" :key="idx">{{ item.name + ' - ' + item.score}}</view>
+				<view class="name-text" v-for="(item, idx) in nameList" :key="idx">{{ item.name + ' (' + item.score + ')'}}</view>
 			</view>
 			<!-- 可以横向滚动的区域 -->
 			<scroll-view scroll-x class="data-area">

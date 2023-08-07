@@ -12,8 +12,20 @@
 					</view>
 				</view>
 				<view class="center-text">
-					<view>{{game.boxscore.homeScore}} - {{game.boxscore.awayScore}}</view>
-					<view class="status-text">{{game.boxscore.status == 1 ? formatTime(Number(game.profile.utcMillis)) : game.boxscore.statusDesc}}</view>
+					<!-- 已经结束的比赛 -->
+					<view v-if="game.boxscore.status == 3" class="finish-score">
+						<text class="left-text score" :class="{lose: game.boxscore.homeScore < game.boxscore.awayScore}">{{game.boxscore.homeScore}}</text>
+						<text class="center-text">已结束</text> 
+						<text class="right-text score" :class="{lose: game.boxscore.homeScore > game.boxscore.awayScore}">{{game.boxscore.awayScore}}</text>
+					</view>
+					<!-- 待开始 -->
+					<view v-else-if="game.boxscore.status == 1">
+						<view class="clock-text">{{formatTime(Number(game.profile.utcMillis))}}</view>
+						<view class="order-btn" @click.stop="subscibeGame(game)">订阅比赛</view>
+					</view>
+					<view v-else>
+						<view class="status-text">{{game.boxscore.status == 1 ? formatTime(Number(game.profile.utcMillis)) : game.boxscore.statusDesc}}</view>
+					</view>	
 				</view>
 				<view class="team away-team">
 					<view>
@@ -49,6 +61,12 @@
 				uni.navigateTo({
 					url: `/pages/index/game/game?gameId=${game.profile.gameId}`
 				})
+			},
+			subscibeGame(game){
+				uni.showToast({
+					icon: 'none',
+					title: '订阅成功，比赛开始前15分钟会通知您。'
+				})
 			}
 		}
 	}
@@ -56,25 +74,34 @@
 
 <style lang="scss" scoped>
 	.schedule-list-area{
-		box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-		padding: 0 24rpx;
 		margin-top: 36rpx;
 		.schedule-item{
-			padding: 24rpx 12rpx;
 			.title{
-				font-size: 32rpx;
-				font-weight: bold;
-				padding-bottom: 20rpx;
-				border-bottom: 2rpx solid #ccc;
-				margin-bottom: 24rpx;
+				position: relative;
+				font-size: 26rpx;
+				padding-left: 24rpx;
+				margin-bottom: 16rpx;
+				margin-top: 24rpx;
+				&::before{
+					content: "";
+					position: absolute;
+					left: 0;
+					width: 6rpx;
+					height: 70%;
+					top: 15%;
+					border-radius: 8rpx;
+					background-color: #3c5cf9;
+				}
 			}
 			.game-item{
 				display: flex;
 				align-items: center;
-				justify-content: center;
-				padding-bottom: 32rpx;
+				justify-content: space-between;
+				padding: 36rpx 42rpx;
+				background-color: #fff;
 				border-bottom: 1px solid #f1f1f1;
 				margin-bottom: 24rpx;
+				border-radius: 24rpx;
 				.team{
 					text-align: center;
 					font-size: 24rpx;
@@ -83,19 +110,49 @@
 					display: block;
 					width: 84rpx;
 					height: 84rpx;
-					margin-bottom: 8rpx;
+					margin-bottom: 18rpx;
 				}
 				&:last-child{
 					border-bottom: none;
 					margin-bottom: 0;
-					padding-bottom: 0;
+				}
+				.finish-score{
+					display: flex;
+					align-items: center;
+					.score{
+						line-height: 48rpx;
+						font-family: meslo;
+						color: #080a1f;
+						font-weight: bold;
+						width: 100rpx;
+						&.lose{
+							color: #bbbcbf;
+						}
+					}
+					.center-text{
+						font-size: 26rpx;
+						color: #d1d1db;
+						font-weight: normal;
+						letter-spacing: 0;
+					}
+				}
+				.clock-text{
+					font-size: 32rpx;
+					font-family: meslo;
+				}
+				.order-btn{
+					font-size: 24rpx;
+					color: #fff;
+					background-color: #3c5df8;
+					padding: 4rpx 0;
+					border-radius: 20rpx;
+					margin-top: 8rpx;
 				}
 			}
 			.center-text{
 				min-width: 160rpx;
-				padding: 0 96rpx;
 				font-weight: bold;
-				font-size: 42rpx;
+				font-size: 48rpx;
 				text-align: center;
 				.status-text{
 					font-size: 26rpx;
